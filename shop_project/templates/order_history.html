@@ -1,0 +1,18 @@
+{% load static %}
+<h1>Sizning zakazlaringiz</h1>
+<ul>
+    {% for order in orders %}
+        <li>
+            <h2>Zakaz #{{ order.id }} - {{ order.created_at }}</h2>
+            <p>Zakazning umumiy narxi: ${{ order.cart.get_total_price }}</p>
+
+            <!-- O'chirish tugmasi qo'shilmoqda -->
+            <form action="{% url 'delete_order' order.id %}" method="POST">
+                {% csrf_token %}
+                <button type="submit">O'chirish</button>
+            </form>
+        </li>
+    {% empty %}
+        <li>Sizda hali zakazlar yo'q.</li>
+    {% endfor %}
+</ul>

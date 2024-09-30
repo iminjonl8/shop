@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Список товаров</title>
+    <link rel="stylesheet" href="{% static 'stayl.css' %}">
+</head>
+<body>
+    <h1>Товары</h1>
+    <ul>
+        {% for product in products %}
+        <li>
+            <img src="{{ product.image.url }}" alt="{{ product.name }}">
+            <h2>{{ product.name }}</h2>
+            <p>{{ product.description }}</p>
+            <p>Цена: ${{ product.price }}</p>
+            <a href="{% url 'add_to_cart' product.id %}">Добавить в корзину</a>
+            <a href="{% url 'edit_product' product.id %}">Редактировать</a>
+            <a href="{% url 'delete_product' product.id %}">Удалить</a>
+        </li>
+        {% endfor %}
+        <a href="{% url 'view_cart' %}">karzina</a>
+    </ul>
+</body>
+</html>
